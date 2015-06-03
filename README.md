@@ -1,7 +1,10 @@
 # Overview
 The Mocana Atlas **Lighthouse Software Development Kit** (Lighthouse SDK) is used within Mocana's Atlas enterprise mobile platform to provide a simple way for developers to add **X.509 certificate-based** authentication to their iOS and Android apps. The Lighthouse SDK and the Atlas platform allow enterprise administrators to present users with a **single login screen**, securely consolidating enterprise authentication and individual app logins.
-Mocana Atlas Lighthouse SDK with MAP/Atlas is a proven end-to-end platform that sets the new standard in enterprise mobile applications and data security. For more information, visit [Mocana Atlas Platform](http://www.mocana.com/atlas-platform "Mocana Atlas Platform").
-## Prerequisites
+
+Mocana Atlas Lighthouse SDK with MAP/Atlas is a proven end-to-end platform that sets the new standard in enterprise mobile applications and data security. For more information, visit [Mocana Atlas Platform](http://www.mocana.com/atlas-platform "Mocana Atlas Platform").
+
+
+## Prerequisites
 
 ### It's easy to get started.
 
@@ -38,7 +41,8 @@ This document assumes a basic familiarity with **Mocana's Atlas Platform**. Enum
 5. **Active Directory** (AD) is Microsoft's directory services database that Atlas uses for authenticating app users.
 6. **Certificate or Certification Authority (CA)** is the enterprise's certificate authority that Atlas uses to issue user certificates.
 7. **Lighthouse SDK** allows app developers to obtain and use the user certificate managed by Atlas and the MAP Wrapper. Typically the certificate is used within the app for certificate-based authentication when connecting to enterprise services.
-
+
+
 
 ## Test Scenarios
 
@@ -66,10 +70,25 @@ To begin, choose an environment, **Android** or **iOS** and a scenario:
 
 
 ## Development Environment
-If you develop apps today there are no additional tools needed to use the Lighthouse SDK.  
-###**Android:**Compatible with Android 4.x or greater and [**Android SDK Tools**](http://developer.android.com/sdk/index.html "Download Android SDK") version 1.6 or newer. Works with Integrated Development Environments (IDE) such as **Eclipse**, and **IntelliJ IDEA**. _NOTE: Requires SDK libraries for Google Android API v21.1.1 or higher_The [system requirements](http://developer.android.com/sdk/index.html "System Requirements") to develop with the Android SDK are:
 
-- A computer capable of running Android Studio, Eclipse or IntelliJ.- An Android mobile device.###**iOS:**Compatible with iOS 7.x and greater. To develop with iOS and **Xcode**, Apple’s Integrated Development Environment (IDE), you must:- Be registered as an Apple’s iOS Developer.- Have a Mac running OS X version 10.9.4 or later.- Xcode Command Line Tools.- An iOS mobile device.
+If you develop apps today there are no additional tools needed to use the Lighthouse SDK.  
+
+###**Android:**
+Compatible with Android 4.x or greater and [**Android SDK Tools**](http://developer.android.com/sdk/index.html "Download Android SDK") version 1.6 or newer. Works with Integrated Development Environments (IDE) such as **Eclipse**, and **IntelliJ IDEA**. _NOTE: Requires SDK libraries for Google Android API v21.1.1 or higher_
+
+The [system requirements](http://developer.android.com/sdk/index.html "System Requirements") to develop with the Android SDK are:
+
+- A computer capable of running Android Studio, Eclipse or IntelliJ.
+- An Android mobile device.
+
+
+###**iOS:**
+Compatible with iOS 7.x and greater. To develop with iOS and **Xcode**, Apple’s Integrated Development Environment (IDE), you must:
+
+- Be registered as an Apple’s iOS Developer.
+- Have a Mac running OS X version 10.9.4 or later.
+- Xcode Command Line Tools.
+- An iOS mobile device.
 
 
 ## 1. [Introduction to Lighthouse SDK](id:anchor1)
@@ -123,9 +142,14 @@ The Android Studio project has a file called **sample.p12** in the _**assets**_ 
 ![Android Screenshot](https://hamkke.mocana.com/owncloud/index.php/s/3Z8i1Qp8DXVALcA/download)
 
 The file `MainActivity.java` is the main Android application file, where **integration with the Lighthouse SDK** occurs, specifically in `MAPCertificateProvider` imported at the top of the `MainActivity.java` file (line 19).
-	import com.mocana.map.android.sdk.MAPCertificateProvider;
-Note that the **sample.p12** file is then imported (lines 35 - 38), so all calls to the `MAPCertificateProvider` methods will reference this embedded certificate.
-     if (DEBUG_SDK) {
+
+	import com.mocana.map.android.sdk.MAPCertificateProvider;
+
+
+Note that the **sample.p12** file is then imported (lines 35 - 38), so all calls to the `MAPCertificateProvider` methods will reference this embedded certificate.
+
+
+     if (DEBUG_SDK) {
         MAPCertificateProvider.initCertificateForDebug(getApplicationContext(), "sample.p12", "secret")
         MAPCertificateProvider.initUserForDebug("jdoe@qwe.com");
      }
@@ -149,9 +173,15 @@ The iOS sample project, **X509 Embedded**, is implemented as a single view app. 
 
 
 The following method is where the main integration occurs between the Lighthouse SDK and the Sample Application. Please note that to access any Lighthouse SDK methods you _must_ include the `MAPSDK.h` and `MAPSDK.m` files in your project.
-	(void)showCertificate
-Specifically the certificate's **subject information** is retrieved by calling the following Lighthouse iOS method. Note that the Lighthouse SDK returns a `SecIdentityRef` object. A `SecIdentityRef` object contains a `SecKeyRef` object and an associated `SecCertificateRef` object.  These objects can be manipulated using standard iOS methods for both `SecCertificateRef` and `SecKeyRef`.	SecIdentityRef identity = MAP_getUserIdentityCertificate();
-The entire set of methods provided by `MAPSDK.m` are listed in detail later on in this document. Feel free to skip ahead to the [API Reference](#anchor5) for more information.
+
+	(void)showCertificate
+
+
+Specifically the certificate's **subject information** is retrieved by calling the following Lighthouse iOS method. Note that the Lighthouse SDK returns a `SecIdentityRef` object. A `SecIdentityRef` object contains a `SecKeyRef` object and an associated `SecCertificateRef` object.  These objects can be manipulated using standard iOS methods for both `SecCertificateRef` and `SecKeyRef`.
+
+	SecIdentityRef identity = MAP_getUserIdentityCertificate();
+
+The entire set of methods provided by `MAPSDK.m` are listed in detail later on in this document. Feel free to skip ahead to the [API Reference](#anchor5) for more information.
 
 ======
 
@@ -248,7 +278,8 @@ To review the source and understand how this application was integrated with the
 The next section contains both _**API Reference**_ and _**Authentication**_ context for the Lighthouse SDK.  
 
 
-## [API Reference](id:anchor5) (Function calls and returns)In addition to callbacks defined specifically for X.509 certificate management, these function calls defined for Mocana Atlas Lighthouse SDK will expose the following properties and methods:
+## [API Reference](id:anchor5) (Function calls and returns)
+In addition to callbacks defined specifically for X.509 certificate management, these function calls defined for Mocana Atlas Lighthouse SDK will expose the following properties and methods:
 
 ##### Android Lighthouse SDK methods
 - `hasUsername`
@@ -278,34 +309,36 @@ The next section contains both _**API Reference**_ and _**Authentication**_ cont
 
 ### Android (Java)
 
-| Name      						| Type | Description | Return Value |
-|---------------------------- |------------ | ------------ |
-| _hasUsername_                	| Boolean | If the application been wrapped with a VPN profile and the wrapped application has established a tunnel to this VPN | `true` |
-| _getUsername_				  	| String | If `hasUsername` is true, returns the `username` typed by the user to connect to the VPN, `null` if `hasUsername` is false | `username` |
+| Name  | Type  | Description | Return Value |
+| :------------|:---------------|:---------------| :-----|
+| _hasUsername_ | Boolean | If the application been wrapped with a VPN profile and the wrapped application has established a tunnel to this VPN | `true` |
+| _getUsername_ | String | If `hasUsername` is true, returns the `username` typed by the user to connect to the VPN, `null` if `hasUsername` is false | `username` |
 | _hasCertificate_				  	| Boolean | If the application been wrapped with an ATLAS profile that has been configured to perform certificate enrollment and the wrapped application has established a tunnel to this ATLAS | `true` |
 | _getKeystoreForUserCertificate_ 	| String | If `hasCertificate` is true, returns the java keystore that contains the public key and private key of the X509Certificate created during certificate enrollment with ATLAS, `null` if `hasCertificate` is false | `username` |  
 | _getUserIdentifyCertificate_ 	| X509Certificate | If `hasCertificate` is true, returns the X509Certificate that contains the public key of the X509Certificate created during certificate enrollment with ATLAS, `null` if `hasCertificate` is false | X509Certificate |
-###Android Debug
 
-| Name      						| Type | Description | Return Value |
-|---------------------------- |------------ | ------------ |
+###Android Debug
+
+| Name  | Type  | Description | Return Value |
+| :------------|:---------------|:---------------| :-----|
 | _initCertificateForDebug_     | Boolean | `initCertificateforDebug`, returns the X509Certificate that contains the public key of the X509Certificate created during certificate enrollment with ATLAS or `null` if `initCertificateForDebug` is `false` | X509Certificate |
 | _initUserForDebug_		 	| String | If `initUserforDebug` is true, returns the debug `username` to connect to the VPN, `null` if `initUserforDebug` is false | `username` |
 
 
 ### iOS (Objective-C)
 
-| Name      						| Type | Description | Return Value |
-|---------------------------- |------------ | ------------ |
+| Name  | Type  | Description | Return Value |
+| :------------|:---------------|:---------------| :-----|
 | _MAP_hasUsername_                	| Boolean | If the application been wrapped with a VPN profile and the wrapped application has established a tunnel to this VPN | `true` |
 | _MAP_getUsername_				  	| String | If `MAP_hasUsername` is true, returns the `username` typed by the user to connect to the VPN, `null` if `hasUsername` is false | `username` |
 | _MAP_hasCertificate_				  	| Boolean | If the application been wrapped with an ATLAS profile that has been configured to perform certificate enrollment and the wrapped application has established a tunnel to this ATLAS | `true` |
 | _MAP_hasUserIdentityCertificate_ 	| Boolean | If `MAP_hasCertificate` is true, returns `true` else returns false | `true` |
 | _MAP_getUserIdentityCertificate_ 	| String | If `MAP_hasUserIdentityCertificate` is true, returns the `SecIdentityRef` identity that contains the public key of the certificate created during certificate enrollment with ATLAS or `null` if `MAP_hasUserIdentityCertificate` is false | `SecIdentityRef` |
-###iOS Debug
 
-| Name      						| Type | Description | Return Value |
-|---------------------------- |------------ | ------------ |
+###iOS Debug
+
+| Name  | Type  | Description | Return Value |
+| :------------|:---------------|:---------------| :-----|
 | _MAP_initCertificateForDebug_     | Boolean | `MAP_initCertificateforDebug`, returns the X509Certificate that contains the public key of the certificate created during Certificate enrollment with ATLAS or null if initUserforDebug is false | X509Certificate |
 | _MAP_initUserForDebug_		 	| String | If `MAP_initCertificateforDebug` is true, returns the debug `secIdentityRef` identity to connect to the VPN, null if `MAP_initCertificateForDebug` is false | `secIdentityRef` |
 
@@ -387,7 +420,8 @@ Below you'll find resources and tutorials that teach how to integrate **mutual a
 We're always happy to help out with code or any other questions you might have. Contact our [**success team**](https://success.mocana.com "success.mocana.com"). This web-based resource center includes access to software updates, technical support news, FAQs, and documentation. You can also submit a request for technical support.
 
 ## FAQs
-**Question: Can the Lighthouse SDK be used to obtain user information other than what is contained in the certificate from the Atlas platform?**
+
+**Question: Can the Lighthouse SDK be used to obtain user information other than what is contained in the certificate from the Atlas platform?**
 
 **Answer:** Today's Lighthouse SDK does not currently support fetching other user credentials (such as AD username or password) from the Atlas platform or MAP Wrapper. 
 
