@@ -1,7 +1,10 @@
 # Overview
 The Mocana Atlas **Lighthouse Software Development Kit** (Lighthouse SDK) is used within Mocana's Atlas enterprise mobile platform to provide a simple way for developers to add **X.509 certificate-based** authentication to their iOS and Android apps. The Lighthouse SDK and the Atlas platform allow enterprise administrators to present users with a **single login screen**, securely consolidating enterprise authentication and individual app logins.
-Mocana Atlas Lighthouse SDK with MAP/Atlas is a proven end-to-end platform that sets the new standard in enterprise mobile applications and data security. For more information, visit [Mocana Atlas Platform](http://www.mocana.com/atlas-platform "Mocana Atlas Platform").
-## Prerequisites
+
+Mocana Atlas Lighthouse SDK with MAP/Atlas is a proven end-to-end platform that sets the new standard in enterprise mobile applications and data security. For more information, visit [Mocana Atlas Platform](http://www.mocana.com/atlas-platform "Mocana Atlas Platform").
+
+
+## Prerequisites
 
 ### It's easy to get started.
 
@@ -23,13 +26,13 @@ These development environment-specific files enable the core features of the Lig
 - _MAPSDK.h_
 - _MAPSDK.m_
 
-Included in the Lighthouse SDK are Android and iOS [sample applications](https://github.com/MocanaCorp/Lighthouse-SDK/tree/master/samples) showing sample integrations. If you'd like to share your own example, just [**let us know.**](https://success.mocana.com "success.mocana.com")
+Included in the Lighthouse SDK are Android and iOS [Sample Applications](https://github.com/MocanaCorp/Lighthouse-SDK/tree/master/samples) showing sample integrations. If you'd like to share your own example, just [**let us know.**](https://success.mocana.com "success.mocana.com")
 
-- **Android:** _map-certificate-viewer_
-- **iOS:** _X509 Embedded_
+- **Android:** [_map-certificate-viewer_] (https://github.com/MocanaCorp/Lighthouse-SDK/tree/master/samples/android)
+- **iOS:** [_X509 Embedded_] (https://github.com/MocanaCorp/Lighthouse-SDK/tree/master/samples/ios/X509%20Embedded)
 
 #### 3.  Terminology
-This document assumes a basic familiarity with **Mocana's Atlas Platform**. Enumerated below are key components involved in integrating the Lighthouse SDK. If you're already familiar with these technologies, and just want to look at the source code, feel free to skip ahead to the [API Reference](#anchor5) and integrate with your organization's back-end.
+This document assumes a basic familiarity with **Mocana's Atlas Platform**. Enumerated below are key components involved in integrating the Lighthouse SDK. If you're already familiar with these technologies, and just want to look at the source code, feel free to skip ahead to the **API Reference** and integrate with your organization's back-end.
 
 1. **Application wrapping** injects enterprise security into mobile applications. You can _app-wrap_ an app binary (.ipa or .apk) with Mocana's **MAP (Mobile Application Protection)** to apply policies, add further authentication or restrict an app or device from specific functions.
 2. **MAP Wrapper** is Mocana's policy and security code that is injected into apps.
@@ -38,7 +41,8 @@ This document assumes a basic familiarity with **Mocana's Atlas Platform**. Enum
 5. **Active Directory** (AD) is Microsoft's directory services database that Atlas uses for authenticating app users.
 6. **Certificate or Certification Authority (CA)** is the enterprise's certificate authority that Atlas uses to issue user certificates.
 7. **Lighthouse SDK** allows app developers to obtain and use the user certificate managed by Atlas and the MAP Wrapper. Typically the certificate is used within the app for certificate-based authentication when connecting to enterprise services.
-
+
+
 
 ## Test Scenarios
 
@@ -48,31 +52,46 @@ The first module runs on a local client without the need for a test server. The 
 
 To begin, choose an environment, **Android** or **iOS** and a scenario:
 
-1. **[Introduction to Lighthouse SDK](#anchor1)** In this scenario, you'll compile and run the Sample Application in debug mode on a local client without the need of a network connection.
-	- [**Android**](#anchor6)
-	- [**iOS**](#anchor7)
+1. **Introduction to Lighthouse SDK** In this scenario, you'll compile and run the Sample Application in debug mode on a local client without the need of a network connection.
+	- [**Android**](#android-sample-app-map-certificate-viewer)
+	- [**iOS**](#ios-sample-app-x509-embedded)
 
-2. **[Wrap the Sample Application with MAP and connect to Atlas](#anchor2).** In this scenario, you'll compile and run the Sample Application and then wrap it with MAP policies of your choosing. Run the MAP-wrapped Sample Application and test your connection to Mocana's hosted Atlas, using your **Mocana Developer Program** username and password, which is emailed upon MDP enrollment.
+2. **Wrap the Sample Application with MAP and connect to Atlas** In this scenario, you'll compile and run the Sample Application and then wrap it with MAP policies of your choosing. Run the MAP-wrapped Sample Application and test your connection to Mocana's hosted Atlas, using your **Mocana Developer Program** username and password, which is emailed upon MDP enrollment.
 
-	- [**Android**](#anchor2)
-	- [**iOS**](#anchor2) (See code-sign note in section two for iOS apps )
+	- [**Android**](#android-sample-app-map-certificate-viewer)
+	- [**iOS**](#ios-sample-app-x509-embedded) (See [_code-signing script_](#2-wrap-the-sample-app-with-map-and-connect-to-atlas) note in section two for iOS apps )
 	
 
-3. **[Lighthouse Sample Client to Atlas-connected MocanaLighthouse Sample Server](#anchor3).** In this **iOS only** scenario, you'll have access to the precompiled _**MocanaSSO**_ application, the Lighthouse Sample Client and the Lighthouse Sample Server and to the source code. Having successfully connected to Atlas, you'll connect to the Mocana-hosted back-end test server: **gilbert.mocana.local**.
-	- **[API Reference](#anchor5)**
-	- **[Authentication](#anchor8)**  
+3. **Lighthouse Sample Client to Atlas-connected MocanaLighthouse Sample Server** In this **iOS only** scenario, you'll have access to the precompiled _**MocanaSSO**_ application, the Lighthouse Sample Client and the Lighthouse Sample Server and to the source code. Having successfully connected to Atlas, you'll connect to the Mocana-hosted back-end test server: **gilbert.mocana.local**.
+	- **[API Reference](#api-reference)**
+	- **[Authentication](#authentication)**  
 
-4. **[Connect your Organization's Wrapped Application](#anchor4)**, Integrate the Mocana Atlas Lighthouse SDK. Compile, wrap and connect to Atlas. Integrate your back-end production environment.
+4. **Connect your Organization's Wrapped Application**, Integrate the Mocana Atlas Lighthouse SDK. Compile, wrap and connect to Atlas. Integrate your back-end production environment.
 
 
 ## Development Environment
-If you develop apps today there are no additional tools needed to use the Lighthouse SDK.  
-###**Android:**Compatible with Android 4.x or greater and [**Android SDK Tools**](http://developer.android.com/sdk/index.html "Download Android SDK") version 1.6 or newer. Works with Integrated Development Environments (IDE) such as **Eclipse**, and **IntelliJ IDEA**. _NOTE: Requires SDK libraries for Google Android API v21.1.1 or higher_The [system requirements](http://developer.android.com/sdk/index.html "System Requirements") to develop with the Android SDK are:
 
-- A computer capable of running Android Studio, Eclipse or IntelliJ.- An Android mobile device.###**iOS:**Compatible with iOS 7.x and greater. To develop with iOS and **Xcode**, Apple’s Integrated Development Environment (IDE), you must:- Be registered as an Apple’s iOS Developer.- Have a Mac running OS X version 10.9.4 or later.- Xcode Command Line Tools.- An iOS mobile device.
+If you develop apps today there are no additional tools needed to use the Lighthouse SDK.  
+
+###**Android:**
+Compatible with Android 4.x or greater and [**Android SDK Tools**](http://developer.android.com/sdk/index.html "Download Android SDK") version 1.6 or newer. Works with Integrated Development Environments (IDE) such as **Eclipse**, and **IntelliJ IDEA**. _NOTE: Requires SDK libraries for Google Android API v21.1.1 or higher_
+
+The [system requirements](http://developer.android.com/sdk/index.html "System Requirements") to develop with the Android SDK are:
+
+- A computer capable of running Android Studio, Eclipse or IntelliJ.
+- An Android mobile device.
 
 
-## 1. [Introduction to Lighthouse SDK](id:anchor1)
+###**iOS:**
+Compatible with iOS 7.x and greater. To develop with iOS and **Xcode**, Apple’s Integrated Development Environment (IDE), you must:
+
+- Be registered as an Apple’s iOS Developer.
+- Have a Mac running OS X version 10.9.4 or later.
+- Xcode Command Line Tools.
+- An iOS mobile device.
+
+
+## 1. Introduction to Lighthouse SDK
 
 _Lighthouse SDK_ is used in combination with MAP and Atlas.  Developers of connected enterprise mobile apps can minimize the number of authentication prompts their users face by  enabling certificate-based authentication to enterprise systems and services, typically with mutually-authenticated SSL.  The Lighthouse SDK connects the app to the MAP Wrapper to obtain the user certificate that is provisioned and managed by Atlas and the MAP Wrapper.
 
@@ -83,10 +102,10 @@ To begin, choose the **Android** or **iOS** Sample App:
 
 ####Sample Applications
 
-- **Android:** [_map-certificate-viewer_](#anchor6)
-- **iOS:** [_X509 Embedded_](#anchor7)
+- **Android:** [_map-certificate-viewer_](#android-sample-app-map-certificate-viewer)
+- **iOS:** [_X509 Embedded_](#ios-sample-app--x509-embedded)
 
-###Android Sample App: [_map-certificate-viewer_](id:anchor6)
+###Android Sample App: _map-certificate-viewer_
 Download and test the **unwrapped** sample Android application on the Android device.
 
 The Android sample project, **map-certificate-viewer**, is implemented as a _single view application_ and does not have any major dependencies outside of the Lighthouse SDK (which is included in this Sample Application).
@@ -123,9 +142,14 @@ The Android Studio project has a file called **sample.p12** in the _**assets**_ 
 ![Android Screenshot](https://hamkke.mocana.com/owncloud/index.php/s/3Z8i1Qp8DXVALcA/download)
 
 The file `MainActivity.java` is the main Android application file, where **integration with the Lighthouse SDK** occurs, specifically in `MAPCertificateProvider` imported at the top of the `MainActivity.java` file (line 19).
-	import com.mocana.map.android.sdk.MAPCertificateProvider;
-Note that the **sample.p12** file is then imported (lines 35 - 38), so all calls to the `MAPCertificateProvider` methods will reference this embedded certificate.
-     if (DEBUG_SDK) {
+
+	import com.mocana.map.android.sdk.MAPCertificateProvider;
+
+
+Note that the **sample.p12** file is then imported (lines 35 - 38), so all calls to the `MAPCertificateProvider` methods will reference this embedded certificate.
+
+
+     if (DEBUG_SDK) {
         MAPCertificateProvider.initCertificateForDebug(getApplicationContext(), "sample.p12", "secret")
         MAPCertificateProvider.initUserForDebug("jdoe@qwe.com");
      }
@@ -139,7 +163,7 @@ The following line simply returns an **X509 Certificate object**, so all standar
 The entire set of methods provided by `MAPCertificateProvider` are listed in the [API Reference](#anchor5) later on in this document. Feel free to skip ahead to that section for more detailed information.
 
 
-###iOS Sample App: : [_X509 Embedded_](id:anchor7)
+###iOS Sample App: _X509 Embedded_
 Download and test the **unwrapped** iOS Sample Application on the iOS Device
 
 
@@ -149,20 +173,26 @@ The iOS sample project, **X509 Embedded**, is implemented as a single view app. 
 
 
 The following method is where the main integration occurs between the Lighthouse SDK and the Sample Application. Please note that to access any Lighthouse SDK methods you _must_ include the `MAPSDK.h` and `MAPSDK.m` files in your project.
-	(void)showCertificate
-Specifically the certificate's **subject information** is retrieved by calling the following Lighthouse iOS method. Note that the Lighthouse SDK returns a `SecIdentityRef` object. A `SecIdentityRef` object contains a `SecKeyRef` object and an associated `SecCertificateRef` object.  These objects can be manipulated using standard iOS methods for both `SecCertificateRef` and `SecKeyRef`.	SecIdentityRef identity = MAP_getUserIdentityCertificate();
-The entire set of methods provided by `MAPSDK.m` are listed in detail later on in this document. Feel free to skip ahead to the [API Reference](#anchor5) for more information.
+
+	(void)showCertificate
+
+
+Specifically the certificate's **subject information** is retrieved by calling the following Lighthouse iOS method. Note that the Lighthouse SDK returns a `SecIdentityRef` object. A `SecIdentityRef` object contains a `SecKeyRef` object and an associated `SecCertificateRef` object.  These objects can be manipulated using standard iOS methods for both `SecCertificateRef` and `SecKeyRef`.
+
+	SecIdentityRef identity = MAP_getUserIdentityCertificate();
+
+The entire set of methods provided by `MAPSDK.m` are listed in detail later on in this document. Feel free to skip ahead to the **API Reference** for more information.
 
 ======
 
-## 2. [Wrap the Sample App with MAP and connect to ATLAS](id:anchor2)
+## 2. Wrap the Sample App with MAP and connect to ATLAS
 
 In this scenario, you'll compile and run the Sample Application and then wrap it with MAP using the Lighthouse VPN policy. Upon successful completion, compile and run the MAP-wrapped Sample Application and test the connection to Mocana's hosted Atlas, using your Mocana provided username and password.
 
 - **Android:**
-- **iOS:** (_[code-signing script](https://success.mocana.com/hc/en-us/articles/201140698) _required)
+- **iOS:** [_code-signing script_](https://success.mocana.com/hc/en-us/articles/201140698) required)
 
-_**Note:** Following the wrapping process the app must be signed with your iOS developer's credentials.  Mocana provides a code-signing script that appropriately handles the format of the MAP wrapped app._
+_**Note:** Following the wrapping process the app must be signed with your iOS developer's credentials.  Mocana provides a code-signing script that appropriately handles the format of the MAP wrapped app. You will be prompted to login to the support portal with your MDP credentials to access and download the script._
 
 Start by securing the Sample Application using Mocana **MAP** (Mobile App Protection), the _client_ component of the **Atlas** platform. This section explains how to use the MAP Console to wrap your applications and ensure they are enveloped with airtight data security policies.
 
@@ -201,7 +231,7 @@ To wrap your app choose the **Per Application VPN**. By selecting this option, t
 
 
 4. [**Sign your Application:
-iOS only**](id:anchor11) Following the wrapping process iOS apps must be signed with your iOS developer's credentials.  Mocana provides a code-signing script, `map_sign.sh`, that appropriately handles the format of the MAP wrapped app (download [map_sign.sh](https://success.mocana.com/hc/en-us/articles/201220436-If-I-am-using-an-MDP-portal-how-do-I-sign-an-iOS-app-after-it-has-been-wrapped- "map_sign.sh") here). Please use it for signing all MAP wrapped iOS apps.   Note that unsigned or improperly signed apps will not install or may not run correctly. For more information, visit the [support portal](https://success.mocana.com/hc/en-us/articles/201220436-If-I-am-using-an-MDP-portal-how-do-I-sign-an-iOS-app-after-it-has-been-wrapped- "map_sign.sh").
+iOS only**](id:anchor11) Following the wrapping process iOS apps must be signed with your iOS developer's credentials.  Mocana provides a code-signing script, `map_sign.sh`, that appropriately handles the format of the MAP wrapped app (download [map_sign.sh](https://success.mocana.com/hc/en-us/articles/201220436-If-I-am-using-an-MDP-portal-how-do-I-sign-an-iOS-app-after-it-has-been-wrapped- "map_sign.sh") here). Please use it for signing all MAP wrapped iOS apps.   Note that unsigned or improperly signed apps will not install or may not run correctly. For more information, visit the Mocana support portal: https://success.mocana.com/hc/en-us/articles/201220436-If-I-am-using-an-MDP-portal-how-do-I-sign-an-iOS-app-after-it-has-been-wrapped- "map_sign.sh").
 
 5. **Install** the app on your mobile device and run it.
 
@@ -248,7 +278,8 @@ To review the source and understand how this application was integrated with the
 The next section contains both _**API Reference**_ and _**Authentication**_ context for the Lighthouse SDK.  
 
 
-## [API Reference](id:anchor5) (Function calls and returns)In addition to callbacks defined specifically for X.509 certificate management, these function calls defined for Mocana Atlas Lighthouse SDK will expose the following properties and methods:
+## API Reference
+In addition to callbacks defined specifically for X.509 certificate management, these function calls defined for Mocana Atlas Lighthouse SDK will expose the following properties and methods:
 
 ##### Android Lighthouse SDK methods
 - `hasUsername`
@@ -278,34 +309,36 @@ The next section contains both _**API Reference**_ and _**Authentication**_ cont
 
 ### Android (Java)
 
-| Name      						| Type | Description | Return Value |
-|---------------------------- |------------ | ------------ |
+| Name | Type | Description | Return Value |
+| :------------ |:--------|:---------|:---------|
 | _hasUsername_                	| Boolean | If the application been wrapped with a VPN profile and the wrapped application has established a tunnel to this VPN | `true` |
 | _getUsername_				  	| String | If `hasUsername` is true, returns the `username` typed by the user to connect to the VPN, `null` if `hasUsername` is false | `username` |
 | _hasCertificate_				  	| Boolean | If the application been wrapped with an ATLAS profile that has been configured to perform certificate enrollment and the wrapped application has established a tunnel to this ATLAS | `true` |
 | _getKeystoreForUserCertificate_ 	| String | If `hasCertificate` is true, returns the java keystore that contains the public key and private key of the X509Certificate created during certificate enrollment with ATLAS, `null` if `hasCertificate` is false | `username` |  
 | _getUserIdentifyCertificate_ 	| X509Certificate | If `hasCertificate` is true, returns the X509Certificate that contains the public key of the X509Certificate created during certificate enrollment with ATLAS, `null` if `hasCertificate` is false | X509Certificate |
-###Android Debug
 
-| Name      						| Type | Description | Return Value |
-|---------------------------- |------------ | ------------ |
+###Android Debug
+
+| Name | Type | Description | Return Value |
+| :------------ |:--------|:---------|:---------|
 | _initCertificateForDebug_     | Boolean | `initCertificateforDebug`, returns the X509Certificate that contains the public key of the X509Certificate created during certificate enrollment with ATLAS or `null` if `initCertificateForDebug` is `false` | X509Certificate |
 | _initUserForDebug_		 	| String | If `initUserforDebug` is true, returns the debug `username` to connect to the VPN, `null` if `initUserforDebug` is false | `username` |
 
 
 ### iOS (Objective-C)
 
-| Name      						| Type | Description | Return Value |
-|---------------------------- |------------ | ------------ |
+| Name | Type | Description | Return Value |
+| :------------ |:--------|:---------|:---------|
 | _MAP_hasUsername_                	| Boolean | If the application been wrapped with a VPN profile and the wrapped application has established a tunnel to this VPN | `true` |
 | _MAP_getUsername_				  	| String | If `MAP_hasUsername` is true, returns the `username` typed by the user to connect to the VPN, `null` if `hasUsername` is false | `username` |
 | _MAP_hasCertificate_				  	| Boolean | If the application been wrapped with an ATLAS profile that has been configured to perform certificate enrollment and the wrapped application has established a tunnel to this ATLAS | `true` |
 | _MAP_hasUserIdentityCertificate_ 	| Boolean | If `MAP_hasCertificate` is true, returns `true` else returns false | `true` |
 | _MAP_getUserIdentityCertificate_ 	| String | If `MAP_hasUserIdentityCertificate` is true, returns the `SecIdentityRef` identity that contains the public key of the certificate created during certificate enrollment with ATLAS or `null` if `MAP_hasUserIdentityCertificate` is false | `SecIdentityRef` |
-###iOS Debug
 
-| Name      						| Type | Description | Return Value |
-|---------------------------- |------------ | ------------ |
+###iOS Debug
+
+| Name | Type | Description | Return Value |
+| :------------ |:--------|:---------|:---------|
 | _MAP_initCertificateForDebug_     | Boolean | `MAP_initCertificateforDebug`, returns the X509Certificate that contains the public key of the certificate created during Certificate enrollment with ATLAS or null if initUserforDebug is false | X509Certificate |
 | _MAP_initUserForDebug_		 	| String | If `MAP_initCertificateforDebug` is true, returns the debug `secIdentityRef` identity to connect to the VPN, null if `MAP_initCertificateForDebug` is false | `secIdentityRef` |
 
@@ -357,7 +390,7 @@ Steps 1, 2, and 3 happen when any wrapped application connects to Atlas. The add
 ![Map Image](https://hamkke.mocana.com/owncloud/index.php/s/voaqXovLv1BVBZL/download)
 
 
-## 4. [Connect and integrate ATLAS with your organization's back-end production environment](id:anchor4)
+## 4. Connect and integrate ATLAS with your organization's back-end production environment
 
 There are many common enterprise systems and services that support X.509 certificate-based client authentication, including most SAP systems, Domino, Apache, IIS and more.  Applications your organization has built to connect to those systems can use Atlas and the Lighthouse SDK to provide prompt-less user authentication and a highly secure, yet streamlined user experience.
 
@@ -366,7 +399,7 @@ For assistance with the Atlas platform and the Lighthouse SDK please use [Mocana
 
 ## Resources
 
-Below you'll find resources and tutorials that teach how to integrate **mutual authentication over SSL** and/or **Certificate Enrollment** for different development environments. In addition there are code examples in the [**Sample Applications**](#anchor1) section which demonstrate the use and context of the Mocana Atlas Lighthouse SDK APIs.
+Below you'll find resources and tutorials that teach how to integrate **mutual authentication over SSL** and/or **Certificate Enrollment** for different development environments. In addition there are code examples in the [**Sample Applications**](https://github.com/MocanaCorp/Lighthouse-SDK/tree/master/samples) section which demonstrate the use and context of the Mocana Atlas Lighthouse SDK APIs.
 
 #### Android and iOS
 
@@ -387,7 +420,8 @@ Below you'll find resources and tutorials that teach how to integrate **mutual a
 We're always happy to help out with code or any other questions you might have. Contact our [**success team**](https://success.mocana.com "success.mocana.com"). This web-based resource center includes access to software updates, technical support news, FAQs, and documentation. You can also submit a request for technical support.
 
 ## FAQs
-**Question: Can the Lighthouse SDK be used to obtain user information other than what is contained in the certificate from the Atlas platform?**
+
+**Question: Can the Lighthouse SDK be used to obtain user information other than what is contained in the certificate from the Atlas platform?**
 
 **Answer:** Today's Lighthouse SDK does not currently support fetching other user credentials (such as AD username or password) from the Atlas platform or MAP Wrapper. 
 
@@ -398,7 +432,7 @@ We're always happy to help out with code or any other questions you might have. 
 
 **Question: Where and how do I insert the code?**
 
-**Answer:** The API reference and Sample Applications provides methods and context for where and how to implement the Lighthouse SDK.
+**Answer:** The API Reference and Sample Applications provide methods and context for where and how to implement the Lighthouse SDK.
 
 
 ### Certificate Errors
