@@ -1,7 +1,7 @@
 # Overview
-The Mocana Atlas **Lighthouse Software Development Kit** (Lighthouse SDK) is used within Mocana's Atlas enterprise mobile platform to provide a simple way for developers to add **X.509 certificate-based** authentication to their iOS and Android apps. The Lighthouse SDK and the Atlas platform allow enterprise administrators to present users with a **single login screen**, securely consolidating enterprise authentication and individual app logins.
+The Mocana Atlas **Lighthouse Software Development Kit** (Lighthouse SDK) is used within Mocana's Atlas enterprise mobile app security platform to provide a simple way for developers to add **X.509 certificate-based** authentication to their iOS and Android apps. The Lighthouse SDK and the Atlas platform allow enterprise administrators to present users with a **single login screen**, securely consolidating enterprise authentication and individual app logins.
 
-Mocana Atlas Lighthouse SDK with MAP/Atlas is a proven end-to-end platform that sets the new standard in enterprise mobile applications and data security. For more information, visit [Mocana Atlas Platform](http://www.mocana.com/atlas-platform "Mocana Atlas Platform").
+Mocana Atlas Lighthouse SDK with the Atlas platform is a proven approach, that sets the new standard in enterprise mobile app security and end user experience. For more information, visit [Mocana Atlas Platform](http://www.mocana.com/atlas-platform "Mocana Atlas Platform").
 
 
 ## Prerequisites
@@ -12,7 +12,7 @@ Mocana Atlas Lighthouse SDK with MAP/Atlas is a proven end-to-end platform that 
 As a member of the **Mocana Developer Program** you will get everything you need to develop, wrap and deploy secure apps. At the bottom of the page, be sure to check the box labeled: **Integrate the Mocana Lighthouse SDK.**
 
 #### 2. Download
-An email was sent by Mocana in response to your request to join the Mocana Developer Program.
+An email will be sent by Mocana in response to your request to join the Mocana ON Developer Program.
 When you receive your confirmation email, click the link to download the **Mocana Atlas Lighthouse SDK**.
 
 These development environment-specific files enable the core features of the Lighthouse SDK:
@@ -34,10 +34,10 @@ Included in the Lighthouse SDK are Android and iOS [Sample Applications](https:/
 #### 3.  Terminology
 This document assumes a basic familiarity with **Mocana's Atlas Platform**. Enumerated below are key components involved in integrating the Lighthouse SDK. If you're already familiar with these technologies, and just want to look at the source code, feel free to skip ahead to the **API Reference** and integrate with your organization's back-end.
 
-1. **Application wrapping** injects enterprise security into mobile applications. You can _app-wrap_ an app binary (.ipa or .apk) with Mocana's **MAP (Mobile Application Protection)** to apply policies, add further authentication or restrict an app or device from specific functions.
+1. **App wrapping** injects enterprise security into mobile apps. You can _app-wrap_ an app binary (.ipa or .apk) with Mocana's **MAP (Mobile Application Protection)** to apply policies, add further authentication or restrict an app or device from specific functions.
 2. **MAP Wrapper** is Mocana's policy and security code that is injected into apps.
 3. **MAP-Wrapped app** is your _successfully MAP-Wrapped_ application.
-4. **Atlas** is Mocana's mobile security gateway.
+4. **Atlas** is Mocana's mobile app security gateway.
 5. **Active Directory** (AD) is Microsoft's directory services database that Atlas uses for authenticating app users.
 6. **Certificate or Certification Authority (CA)** is the enterprise's certificate authority that Atlas uses to issue user certificates.
 7. **Lighthouse SDK** allows app developers to obtain and use the user certificate managed by Atlas and the MAP Wrapper. Typically the certificate is used within the app for certificate-based authentication when connecting to enterprise services.
@@ -56,7 +56,7 @@ To begin, choose an environment, **Android** or **iOS** and a scenario:
 	- [**Android**](#android-sample-app-map-certificate-viewer)
 	- [**iOS**](#ios-sample-app-x509-embedded)
 
-2. **Wrap the Sample Application with MAP and connect to Atlas** In this scenario, you'll compile and run the Sample Application and then wrap it with MAP policies of your choosing. Run the MAP-wrapped Sample Application and test your connection to Mocana's hosted Atlas, using your **Mocana Developer Program** username and password, which is emailed upon MDP enrollment.
+2. **Wrap the Sample App with MAP and connect to Atlas** In this scenario, you'll compile and run the Sample Application and then wrap it with MAP policies of your choosing. Run the MAP-wrapped Sample Application and test your connection to Mocana's hosted Atlas, using your **Mocana Developer Program** username and password, which is emailed upon MDP enrollment.
 
 	- [**Android**](#android-sample-app-map-certificate-viewer)
 	- [**iOS**](#ios-sample-app-x509-embedded) (See [_code-signing script_](#2-wrap-the-sample-app-with-map-and-connect-to-atlas) note in section two for iOS apps )
@@ -93,7 +93,7 @@ Compatible with iOS 7.x and greater. To develop with iOS and **Xcode**, Apple’
 
 ## 1. Introduction to Lighthouse SDK
 
-_Lighthouse SDK_ is used in combination with MAP and Atlas.  Developers of connected enterprise mobile apps can minimize the number of authentication prompts their users face by  enabling certificate-based authentication to enterprise systems and services, typically with mutually-authenticated SSL.  The Lighthouse SDK connects the app to the MAP Wrapper to obtain the user certificate that is provisioned and managed by Atlas and the MAP Wrapper.
+_Lighthouse SDK_ is used in combination with the Atlas platform.  Developers of connected enterprise mobile apps can minimize the number of authentication prompts their users face by  enabling certificate-based authentication to enterprise systems and services, typically with mutually-authenticated SSL.  The Lighthouse SDK connects the app to the MAP Wrapper to obtain the user certificate that is provisioned and managed by Atlas and the MAP Wrapper.
 
 
 In this scenario you'll compile and run the Android or iOS Sample Application in debug mode on a local client. Upon success, the application returns a certificate view with a green _**thumbs-up**_ icon.
