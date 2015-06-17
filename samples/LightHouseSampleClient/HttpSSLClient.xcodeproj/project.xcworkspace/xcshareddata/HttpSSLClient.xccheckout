@@ -10,31 +10,43 @@
 	<string>HttpSSLClient</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>FA6FEB2ACA72B4D0BB015C3F722D3DE2D564E024</key>
-		<string>https://github.com/MocanaONDevNetwork/LighthouseHTTPiOS.git</string>
+		<key>1927F9E4F29381FD2B6AE7DEACAA03DB9A67C4EA</key>
+		<string>https://github.com/MocanaCorp/Lighthouse-SDK/</string>
+		<key>3C082846E626979AB954C490F6CE5CBC11D88941</key>
+		<string>https://github.com/MocanaONDevNetwork/LighthouseSDK.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>HttpSSLClient.xcodeproj</string>
+	<string>samples/LightHouseSampleClient/HttpSSLClient.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>FA6FEB2ACA72B4D0BB015C3F722D3DE2D564E024</key>
-		<string>../..</string>
+		<key>1927F9E4F29381FD2B6AE7DEACAA03DB9A67C4EA</key>
+		<string>../../../..</string>
+		<key>3C082846E626979AB954C490F6CE5CBC11D88941</key>
+		<string>../../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/MocanaONDevNetwork/LighthouseHTTPiOS.git</string>
+	<string>https://github.com/MocanaCorp/Lighthouse-SDK/</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>FA6FEB2ACA72B4D0BB015C3F722D3DE2D564E024</string>
+	<string>1927F9E4F29381FD2B6AE7DEACAA03DB9A67C4EA</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>FA6FEB2ACA72B4D0BB015C3F722D3DE2D564E024</string>
+			<string>3C082846E626979AB954C490F6CE5CBC11D88941</string>
 			<key>IDESourceControlWCCName</key>
-			<string>HTTP_x509</string>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1927F9E4F29381FD2B6AE7DEACAA03DB9A67C4EA</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Lighthouse-SDK</string>
 		</dict>
 	</array>
 </dict>

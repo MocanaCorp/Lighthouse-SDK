@@ -10,6 +10,21 @@ var formidable = require('formidable');
 var fs = require('fs');
 var https = require('https');
 
+//setting up CORS option
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+      res.send(200);
+    }
+    else {
+      next();
+    }
+};
+
 
 var options = {
     key: fs.readFileSync('ssl/server/keys/server.key'),
@@ -17,6 +32,7 @@ var options = {
     ca: fs.readFileSync('ssl/ca/ca.crt'),
     requestCert: true,
     rejectUnauthorized: false,
+
 
 };
 
@@ -63,6 +79,9 @@ else {
 
 }
 
+//CORS "middleware"
+app.use(allowCrossDomain);
+
 //public static middleware
 app.use(express.static(__dirname + '/public'));
 
@@ -95,6 +114,36 @@ app.get('/jqtest', function(req, res){
 
 });
 
+
+app.get('/api/username', function(req, res){
+
+    if (req.client.authorized){
+     var subject = req.connection.getPeerCertificate().subject;
+        res.setHeader('Content-Type', 'application/json');
+        res.json({'user' : subject.CN });
+    }
+    else {
+        res.status(401);
+        res.json({'error': 'unauthorized'});
+    }
+
+
+});
+
+app.get('/api/userinfo', function(req, res){
+
+    if (req.client.authorized){
+        var subject = req.connection.getPeerCertificate().subject;
+        res.setHeader('Content-Type', 'application/json');
+        res.json({'user' : {'email' : subject.CN + '@mocana.com', 'phone':'555-555-5555'}});
+    }
+    else {
+        res.status(401);
+        res.json({'error': 'unauthorized'});
+    }
+
+
+});
 
 app.get('/headers', function(req,res){
     var ua = '';

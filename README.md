@@ -1,3 +1,5 @@
+
+
 # Overview
 The Mocana Atlas **Lighthouse Software Development Kit** (Lighthouse SDK) is used within Mocana's Atlas enterprise mobile app security platform to provide a simple way for developers to add **X.509 certificate-based** authentication to their iOS and Android apps. The Lighthouse SDK and the Atlas platform allow enterprise administrators to present users with a **single login screen**, securely consolidating enterprise authentication and individual app logins.
 
