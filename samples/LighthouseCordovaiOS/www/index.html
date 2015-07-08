@@ -1,0 +1,47 @@
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+            <script src="js/index.js"></script>
+            <script src="js/jquery-2.1.4.min.js"></script>
+            <script src="js/jquery.mobile-1.4.5.js"></script>
+            <script src="js/md5.js"></script>
+        </head>
+        <body><h1>
+            <div id="username">
+                
+            </div>
+            </h1>
+
+            <div id="nameMD5">
+            </div>
+            
+            <div id="phone">
+            </div>
+            <script>
+                
+                
+                $.getJSON("https://gilbert.mocana.local/api/username/",
+                              function(data){
+
+                          $("#username").append(data.user);
+
+                    
+                          
+                });
+                
+                $.getJSON("https://gilbert.mocana.local/api/userinfo/",
+                          function(data){
+                          
+                          $("#phone").append(data.user.phone);
+                          var hash = CryptoJS.MD5(data.user.email).toString();
+                          $("#nameMD5").append(hash);
+                          
+                });
+                
+                
+
+                </script>
+        </body>
+    </html>
