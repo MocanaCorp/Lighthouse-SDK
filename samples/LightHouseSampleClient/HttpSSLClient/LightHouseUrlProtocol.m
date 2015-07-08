@@ -26,6 +26,10 @@
     if ([NSURLProtocol propertyForKey:@"MyURLProtocolHandledKey" inRequest:request]) {
         return NO;
     }
+    
+    if (request.URL.isFileURL || request.URL.isFileReferenceURL){
+        return NO;
+    }
      
     return YES;
 
@@ -73,8 +77,12 @@
 - (void) connection:(NSURLConnection*)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
     
+
     NSURLCredential *credential = self.getMAPCredential;
+
+
     
+    //If there is a MAP User Certificate send that to the challenge
     if(credential){
         
         
@@ -85,13 +93,18 @@
         
     }
     
+    //respond to the challenge without a credential if we can't source the certificate from MAP
+    //
     else {
         NSLog(@"No MAP CERT SENT");
+        [[challenge sender] continueWithoutCredentialForAuthenticationChallenge:challenge ];
     }
     
     
 }
 
+
+//OLD SKOOL METHOD - INCLUDED FOR LEGACY SUPPORT
 - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
     
@@ -109,6 +122,7 @@
     
     else {
         NSLog(@"NO CERTIFICATE WAS SENT");
+        [[challenge sender] useCredential:nil forAuthenticationChallenge:challenge];
     }
     
 }
